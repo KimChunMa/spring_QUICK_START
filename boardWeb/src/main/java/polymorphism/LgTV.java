@@ -1,0 +1,16 @@
+package polymorphism;
+
+import javax.annotation.Resource;
+import org.springframework.stereotype.Component;
+
+@Component("tv")
+public class LgTV implements TV{
+	@Resource(name="apple")
+	private Speaker speaker;
+	
+	public LgTV() {System.out.println("lg°´Ã¼");}
+	public void powerOn() {System.out.println("Lg Àü¿ø Å°±â");}
+	public void powerOff() {System.out.println("Lg Àü¿ø ²ô±â");}
+	public void volumeUp() {speaker.volumeUp();}
+	public void volumeDown() {speaker.volumeDown();}
+}
