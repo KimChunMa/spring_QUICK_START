@@ -6,6 +6,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 		
-		<context:component-scan base-package="polymorphism"></context:component-scan>
-	
+		<context:component-scan base-package="Taining2"></context:component-scan>
+		
+		
+		<!-- <bean id="userSerivce" class="Taining2.user.impl.UserServiceimpl">
+			<property name="userDAO" ref="userDAO"></property>
+		</bean>
+		
+		<bean id ="userDAO" class="Taining2.user.impl.UserDAO"></bean> -->
 </beans>
