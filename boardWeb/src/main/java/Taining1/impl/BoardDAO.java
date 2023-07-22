@@ -50,7 +50,7 @@ public class BoardDAO {
 			ps.setString(3,dto.getContent());
 			ps.executeUpdate();
 		}catch(Exception e) {e.printStackTrace();}
-		finally {JDBCUtill.close(ps, conn);}
+		finally {}
 	}	
 	
 	//삭제
@@ -61,12 +61,12 @@ public class BoardDAO {
 			ps.setInt(1,dto.getSeq());
 			ps.executeUpdate();
 		}catch(Exception e) {e.printStackTrace();}
-		finally {JDBCUtill.close(ps, conn);}
+		finally {}
 	}	
 	
 	//상세글 조회
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("수정");
+		System.out.println("상세글");
 		try {
 			ps = conn.prepareStatement(BOARD_GET);
 			ps.setInt(1,dto.getSeq());
@@ -83,7 +83,7 @@ public class BoardDAO {
 				return board;
 			}
 		}catch(Exception e) {e.printStackTrace();}
-		finally {JDBCUtill.close(ps, conn);}
+		finally {}
 		return null;
 	}
 	
@@ -94,7 +94,6 @@ public class BoardDAO {
 		try {
 			ps = conn.prepareStatement(BOARD_LIST);
 			rs=ps.executeQuery();
-			System.out.println("오류안남");
 			while(rs.next()) {
 				BoardDTO board = new BoardDTO();
 				board.setSeq(rs.getInt("SEQ"));
@@ -106,7 +105,7 @@ public class BoardDAO {
 				list.add(board);
 			}
 		}catch(Exception e) {e.printStackTrace();}
-		finally {JDBCUtill.close(ps, conn);}
+		finally {}
 		return list;
 	}
 	

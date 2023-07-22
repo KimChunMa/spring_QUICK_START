@@ -18,13 +18,14 @@ public class BoardServiceClient {
 		BoardService boardService = (BoardService) container.getBean("boardSerivce");
 		
 		//3.글 등록 기능 테스트
-		BoardDTO dto = new BoardDTO();
-		dto.setTitle("임시제목");
-		dto.setWriter("홍길동");
-		dto.setContent("임시내용..");
-		boardService.insertBoard(dto);
 		
-		
+		 BoardDTO dto = new BoardDTO(); 
+		 dto.setTitle("임시제목"); dto.setWriter("홍길동");
+		 dto.setContent("임시내용.."); 
+		 //boardService.insertBoard(dto);
+		dto.setSeq(3); 
+		System.out.println(boardService.getBoard(dto));
+		 
 		//4.글 검색
 		List<BoardDTO> list = boardService.getBoardList();
 		for(BoardDTO board : list) {
@@ -32,6 +33,6 @@ public class BoardServiceClient {
 			System.out.println();
 		}
 		
-		container.close();
+		
 	}
 }
