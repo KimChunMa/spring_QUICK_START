@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="Taining1.impl.BoardDAO"%>
-<%@page import="Taining1.board.BoardDTO"%>
-<%
-	BoardDTO dto = new BoardDTO();
-	BoardDAO dao = new BoardDAO();
-	List<BoardDTO> boardlist = dao.getBoardList();
-%>
+
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +11,10 @@
 <body>
 	<center>
 		<h1> 글 목록</h1>
-		<h3> 테스트님 환영합니다 <a href="login_proc.jsp">Log out</a></h3>
+		<h3> 테스트님 환영합니다 <a href="logout.do">Log out</a></h3>
 		
 		<!-- 검색 -->
-		<form action="getBoardList.jsp" method="post"></form>
+		<form action="getBoardList.do" method="post"></form>
 			<table board="1" cellpadding="0" cellspacing="0" width="700">
 				<tr>
 					<td align="right">
@@ -45,16 +39,16 @@
 				<th bgcolor="orange" width="100">조회수</th>
 			</tr>
 			
-			<% for(BoardDTO board : boardlist){ %>
+			<c:forEach items="${boardList}" var="board">
 				<tr>
-					<td> <%= board.getSeq() %> </td>
-					<td align="left"><a href="getBoard.jsp?seq=<%= board.getSeq()%>"> 
-									 <%= board.getTitle() %></a>  </td>
-					<td><%= board.getWriter() %></td>
-					<td><%= board.getRegdate() %></td>
-					<td><%= board.getCnt() %></td>
+					<td> ${board.seq} </td>
+					<td align="left"><a href="getBoard.do?seq=${board.seq}"> 
+									 ${board.title}</a>  </td>
+					<td>${board.writer}</td>
+					<td>${board.regdate}</td>
+					<td>${board.cnt}</td>
 				</tr>
-			<% } %>
+			</c:forEach>
 		</table>
 		<br>
 		
