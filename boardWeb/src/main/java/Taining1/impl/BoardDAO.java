@@ -28,9 +28,9 @@ public class BoardDAO {
 	private final String BOARD_LIST = 
 			"select * from board order by seq desc";
 	
-	//»ğÀÔ
+	//ï¿½ï¿½ï¿½ï¿½
 	public void insertBoard(BoardDTO dto) {
-		System.out.println("ÀÎ¼³Æ®");
+		System.out.println("ï¿½Î¼ï¿½Æ®");
 		try {
 			ps = conn.prepareStatement(BOARD_INSERT);
 			ps.setString(1,dto.getTitle());
@@ -40,22 +40,22 @@ public class BoardDAO {
 		}catch(Exception e) {e.printStackTrace();}
 	}
 	
-	//¾÷µ¥ÀÌÆ®
+	//ê¸€ ìˆ˜ì •
 	public void updateBoard(BoardDTO dto) {
-		System.out.println("¼öÁ¤");
+		System.out.println("updateBoard");
 		try {
 			ps = conn.prepareStatement(BOARD_UPDATE);
 			ps.setString(1,dto.getTitle());
-			ps.setString(2,dto.getWriter());
-			ps.setString(3,dto.getContent());
+			ps.setString(2,dto.getContent());
+			ps.setInt(3,dto.getSeq());
 			ps.executeUpdate();
 		}catch(Exception e) {e.printStackTrace();}
 		finally {}
 	}	
 	
-	//»èÁ¦
+	//ê¸€ ì‚­ì œ
 	public void deleteBoard(BoardDTO dto) {
-		System.out.println("¼öÁ¤");
+		System.out.println("deleteBoard");
 		try {
 			ps = conn.prepareStatement(BOARD_DELETE);
 			ps.setInt(1,dto.getSeq());
@@ -64,9 +64,9 @@ public class BoardDAO {
 		finally {}
 	}	
 	
-	//»ó¼¼±Û Á¶È¸
+	//ê²Œì‹œíŒ ì–»ê¸°
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("»ó¼¼±Û");
+		System.out.println("DAO getBoard");
 		try {
 			ps = conn.prepareStatement(BOARD_GET);
 			ps.setInt(1,dto.getSeq());
@@ -87,9 +87,9 @@ public class BoardDAO {
 		return null;
 	}
 	
-	//ÀüÃ¼ ±Û Á¶È¸
+	//ì „ì²´ ê²Œì‹œíŒ
 	public List<BoardDTO> getBoardList(){
-		System.out.println("ÀüÃ¼Ãâ·Â");
+		System.out.println("getBoardList");
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		try {
 			ps = conn.prepareStatement(BOARD_LIST);

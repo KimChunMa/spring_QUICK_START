@@ -22,7 +22,7 @@ public class BoardServiceClient {
 		 BoardDTO dto = new BoardDTO(); 
 		 dto.setTitle("임시제목"); dto.setWriter("홍길동");
 		 dto.setContent("임시내용.."); 
-		 //boardService.insertBoard(dto);
+		 boardService.insertBoard(dto);
 		dto.setSeq(3); 
 		System.out.println(boardService.getBoard(dto));
 		 

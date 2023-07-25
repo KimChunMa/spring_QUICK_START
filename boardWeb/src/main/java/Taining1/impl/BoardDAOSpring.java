@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -14,9 +15,9 @@ import org.springframework.stereotype.Repository;
 import Taining1.board.BoardDTO;
 
 @Repository
-public class BoardDAOSpring extends JdbcDaoSupport{
+public class BoardDAOSpring {
 	private final String Insert = "insert into board(seq,title,writer,content) "
-								+ "values((select nvl(max(seq),0)+1 from board),?,?,?)";
+								+ "values(100,?,?,?)";
 	private final String Update = "update board set title=?,content=? where seq=?";
 	
 	private final String Delete = "delete board where seq=?";
@@ -25,35 +26,40 @@ public class BoardDAOSpring extends JdbcDaoSupport{
 	
 	private final String List = "select * from board order by seq desc";
 	
+	/*
+	 * @Autowired 
+	 * public void setSuperDataSource(DataSource dataSource) {
+	 * super.setDataSource(dataSource); }
+	 */
+	
 	@Autowired
-	public void setSuperDataSource(DataSource dataSource) {
-		super.setDataSource(dataSource);
-	}
+	private JdbcTemplate jdbcTemplate;
+	
 	
 	public void insertBoard(BoardDTO dto) {
 		System.out.println("Spring JDBC 기능 insert");	
-		getJdbcTemplate().update(Insert,dto.getTitle(), dto.getWriter(), dto.getContent());
+		jdbcTemplate.update(Insert,dto.getTitle(), dto.getWriter(), dto.getContent());
 	}
 	
 	public void updateBoard(BoardDTO dto) {
 		System.out.println("Spring JDBC 기능 update");	
-		getJdbcTemplate().update(Update,dto.getTitle(), dto.getWriter(), dto.getContent());
+		jdbcTemplate.update(Update,dto.getTitle(), dto.getWriter(), dto.getContent());
 	}
 	
 	public void deleteBoard(BoardDTO dto) {
 		System.out.println("Spring JDBC 기능 delete");	
-		getJdbcTemplate().update(Delete,dto.getSeq());
+		jdbcTemplate.update(Delete,dto.getSeq());
 	}
 	
 	public BoardDTO getBoard(BoardDTO dto) {
 		System.out.println("Spring JDBC 기능 get");	
 		Object[] args = {dto.getSeq()};
-		return getJdbcTemplate().queryForObject(Get, args,new BoardRowMapper());
+		return jdbcTemplate.queryForObject(Get, args,new BoardRowMapper());
 	}
 	
-	public List<BoardDTO> getBoardList(BoardDTO dto) {
+	public List<BoardDTO> getBoardList() {
 		System.out.println("Spring JDBC 기능 List");	
-		return getJdbcTemplate().query(List, new BoardRowMapper());
+		return jdbcTemplate.query(List, new BoardRowMapper());
 	}
 	
 

@@ -12,10 +12,11 @@ import Taining1.board.BoardService;
 public class BoardServicelmpl implements BoardService{
 
 	@Autowired
-	private BoardDAO boardDao;
+	private BoardDAOSpring boardDao;
 	
 	@Override
 	public void insertBoard(BoardDTO dto) {
+		boardDao.insertBoard(dto);
 		boardDao.insertBoard(dto);
 	}
 

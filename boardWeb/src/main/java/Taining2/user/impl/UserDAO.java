@@ -22,9 +22,9 @@ public class UserDAO {
 			"insert into users(id, password, name, role) values(?,?,?,?)";
 	
 
-	//»ğÀÔ
+	//ì‚½ì…
 	public void InsertUser(UserDTO dto) {
-		System.out.println("ÀÎ¼³Æ®");
+		System.out.println("ì¸ì„¤íŠ¸ ì‹¤í–‰");
 		try {
 			System.out.println(dto);
 			ps = conn.prepareStatement(USER_INSERT);
@@ -33,13 +33,13 @@ public class UserDAO {
 			ps.setString(3,dto.getName());
 			ps.setString(4,dto.getRole());
 			ps.executeUpdate();
-			System.out.println("»ğÀÔ¼º°ø");
+			System.out.println("ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½");
 		}catch(Exception e) {e.printStackTrace();}
 	}
 	
 	//get
 	public UserDTO getUser(UserDTO dto) {
-		System.out.println("[DAO]À¯ÀúÁ¤º¸È®ÀÎ");
+		System.out.println("[DAO] get ì‹¤í–‰");
 		
 		try {
 			ps = conn.prepareStatement(USER_GET);
